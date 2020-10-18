@@ -1,3 +1,5 @@
+import sbt.Keys.libraryDependencies
+
 val commonSettings = Seq(
   scalaVersion := "2.12.1"
 )
@@ -20,3 +22,8 @@ lazy val answers = (project in file("answers"))
   .settings(
     name := "answers"
   )
+libraryDependencies in exercises ++= Seq(
+  "org.scalactic" %% "scalactic" % "3.2.0",
+  "org.scalatest" %% "scalatest" % "3.2.0",
+  "org.scalatest" %% "scalatest-funspec" % "3.2.0"
+)
