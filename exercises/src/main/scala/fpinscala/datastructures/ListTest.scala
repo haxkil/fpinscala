@@ -15,11 +15,14 @@ class ListTest extends AnyFunSpec {
       println(v)
     }
 
-    it("should sum") {}
+    it("should sum") {
+      assertResult(6)(foldLeft(List(0, 1, 2, 3), 0)(_ + _))
+      assertResult(24)(foldLeft(List(1, 2, 3, 4), 1)(_ * _))
+    }
 
     it("should product2") {}
 
-    it("should length") {}
+
 
     it("should product") {}
 
@@ -28,7 +31,10 @@ class ListTest extends AnyFunSpec {
     it("should init") {
       val l: List[Int] = List(1, 2, 3, 4)
       println(init(l))
+    }
 
+    it("should length") {
+      assertResult(5)(length(List(1,2,3,4,5)))
     }
 
     it("should apply") {}

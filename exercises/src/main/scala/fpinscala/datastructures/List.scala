@@ -88,21 +88,24 @@ object List { // `List` companion object. Contains functions for creating and wo
   @tailrec
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] =
     l match {
-      case Nil => l
-      case Cons(h, t) =>
-        if (!f(h)) l
-        else dropWhile(t, f)
+      case Cons(h, t) if f(h) => dropWhile(t, f)
+      case _ => l
     }
 
   def init[A](l: List[A]): List[A] =
     l match {
       case Cons(_, Nil) | Nil  => Nil
-      case Cons(h, Cons(_, _)) => Cons(h, init(tail(l)))
+      case Cons(h, t) => Cons(h, init(t))
     }
 
-  def length[A](l: List[A]): Int = ???
+  def length[A](l: List[A]): Int = foldRight(l, 0)((_, z) => z + 1)
 
-  def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B = ???
+  @tailrec
+  def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B =
+    l match {
+      case Nil => z
+      case Cons(h, t) => foldLeft(t, f(z, h))(f)
+    }
 
   def map[A, B](l: List[A])(f: A => B): List[B] = ???
 }
