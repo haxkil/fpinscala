@@ -20,12 +20,6 @@ class ListTest extends AnyFunSpec {
       assertResult(24)(foldLeft(List(1, 2, 3, 4), 1)(_ * _))
     }
 
-    it("should product2") {}
-
-    it("should product") {}
-
-    it("should dropWhile") {}
-
     it("should init") {
       val l: List[Int] = List(1, 2, 3, 4)
       println(init(l))
@@ -35,27 +29,9 @@ class ListTest extends AnyFunSpec {
       assertResult(5)(length(List(1, 2, 3, 4, 5)))
     }
 
-    it("should apply") {}
-
-    it("should foldRight") {}
-
-    it("should drop") {}
-
     it("should map") {
       val l = List(1, 2, 3)
       assertResult(List(2, 3, 4))(map(l)(_ + 1))
     }
-
-    it("should foldLeft") {}
-
-    it("should x") {}
-
-    it("should sum2") {}
-
-    it("should tail") {}
-
-    it("should setHead") {}
-
-    it("should append") {}
   }
 }
