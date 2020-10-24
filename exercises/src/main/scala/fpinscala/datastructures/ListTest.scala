@@ -22,8 +22,6 @@ class ListTest extends AnyFunSpec {
 
     it("should product2") {}
 
-
-
     it("should product") {}
 
     it("should dropWhile") {}
@@ -34,7 +32,7 @@ class ListTest extends AnyFunSpec {
     }
 
     it("should length") {
-      assertResult(5)(length(List(1,2,3,4,5)))
+      assertResult(5)(length(List(1, 2, 3, 4, 5)))
     }
 
     it("should apply") {}
@@ -43,7 +41,10 @@ class ListTest extends AnyFunSpec {
 
     it("should drop") {}
 
-    it("should map") {}
+    it("should map") {
+      val l = List(1, 2, 3)
+      assertResult(List(2, 3, 4))(map(l)(_ + 1))
+    }
 
     it("should foldLeft") {}
 

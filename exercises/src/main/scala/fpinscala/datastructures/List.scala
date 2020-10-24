@@ -1,6 +1,8 @@
 package fpinscala.datastructures
 
 import scala.annotation.tailrec
+import scala.collection.mutable
+import scala.collection.mutable.ListBuffer
 
 sealed trait List[+A] // `List` data type, parameterized on a type, `A`
 case object Nil
@@ -89,13 +91,13 @@ object List { // `List` companion object. Contains functions for creating and wo
   def dropWhile[A](l: List[A], f: A => Boolean): List[A] =
     l match {
       case Cons(h, t) if f(h) => dropWhile(t, f)
-      case _ => l
+      case _                  => l
     }
 
   def init[A](l: List[A]): List[A] =
     l match {
-      case Cons(_, Nil) | Nil  => Nil
-      case Cons(h, t) => Cons(h, init(t))
+      case Cons(_, Nil) | Nil => Nil
+      case Cons(h, t)         => Cons(h, init(t))
     }
 
   def length[A](l: List[A]): Int = foldRight(l, 0)((_, z) => z + 1)
@@ -103,9 +105,21 @@ object List { // `List` companion object. Contains functions for creating and wo
   @tailrec
   def foldLeft[A, B](l: List[A], z: B)(f: (B, A) => B): B =
     l match {
-      case Nil => z
+      case Nil        => z
       case Cons(h, t) => foldLeft(t, f(z, h))(f)
     }
 
-  def map[A, B](l: List[A])(f: A => B): List[B] = ???
+  def map[A, B](l: List[A])(f: A => B): List[B] = {
+    val b: ListBuffer[B] = new mutable.ListBuffer
+    @tailrec
+    def map(l: List[A]): Unit =
+      l match {
+        case Nil => Nil
+        case Cons(h, t) =>
+          b += f(h)
+          map(t)
+      }
+    map(l)
+    List(b.toList: _*)
+  }
 }
