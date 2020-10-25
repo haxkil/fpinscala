@@ -45,13 +45,5 @@ class OptionTest extends AnyFunSpec {
       assertResult(Some(List(1, 2)))(Option.traverse(List("1", "2"))(f))
       assertResult(None)(Option.traverse(List("1", "int"))(f))
     }
-
-    it("should failingFn2") {}
-
-    it("should failingFn") {}
-
-    it("should map2") {}
-
-    it("should mean") {}
   }
 }
